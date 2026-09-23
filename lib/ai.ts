@@ -1,10 +1,6 @@
 import OpenAI from "openai";
 import { getRecentMessages, getMemories } from "./db";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export async function getAIResponse({
   userId,
   message,
@@ -15,6 +11,10 @@ export async function getAIResponse({
   if (!process.env.OPENAI_API_KEY) {
     throw new Error("OPENAI_API_KEY is not configured");
   }
+
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
 
   const model = process.env.OPENAI_MODEL || "gpt-5-mini";
 
